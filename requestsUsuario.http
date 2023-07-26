@@ -1,0 +1,14 @@
+
+###
+POST  http://localhost:3000/crearUsuario HTTP/1.1
+Content-Type: application/json
+
+{
+    "nombreUsuario": "Maite05",
+    "nombre": "Maite Quinatana",
+    "password": "123",
+    "huella": "mqu%682oks0o)8/#ghj"
+}
+
+###
+GET http://localhost:3000/obtenerUsuarios HTTP/1.1
