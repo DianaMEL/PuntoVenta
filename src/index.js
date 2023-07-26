@@ -16,12 +16,14 @@ app.use(express.json());
 
 //importamos los archivos de rutas para cada modelo
 const usuarioRoutes = require('./routes/usuarios');
+const ventaRoutes = require('./routes/ventas');
 
 // routes
 app.get('/', (req, res) => {
     res.send('welcome');
 });
 app.use('/', usuarioRoutes);
+app.use('/', ventaRoutes);
 
 // conexion a MongoDB
 mongoose.connect(process.env.MONGODB_URI)

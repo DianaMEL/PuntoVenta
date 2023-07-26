@@ -1,0 +1,29 @@
+
+###
+POST http://localhost:3000/crearVenta HTTP/1.1
+Content-Type: application/json
+
+{
+    "productos": [{"nombre": "coca", "tipo": "bebida", "precio": 16},
+                  {"nombre": "pepsi e", "tipo": "bebida", "precio": 16}],
+    "total": 34
+}
+
+###
+GET http://localhost:3000/obtenerVentas HTTP/1.1
+
+###
+GET http://localhost:3000/obtenerVenta/64b6efec2fb39c03840f7b25 HTTP/1.1
+
+### 
+PUT http://localhost:3000/actualizarVenta/64b6efec2fb39c03840f7b25 HTTP/1.1
+Content-Type: application/json
+
+{
+    "productos": [{"nombre": "jabon", "tipo": "limpieza", "precio": 16},
+                  {"nombre": "crema lala", "tipo": "lacteos", "precio": 32}],
+    "total": 48
+}
+
+###
+DELETE http://localhost:3000/eliminarVenta/64b6f99603648f8fa91b6cc1 HTTP/1.1
