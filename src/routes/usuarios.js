@@ -26,7 +26,7 @@ router.post('/crearUsuario', (req, res) =>{
 
 /**  Obtener Usuarios
  * Creamos la ruta '/obtenerUsuarios' 
- * Es un GET que permite acceder al los registros existentes en la base de datos
+ * Es un GET que permite acceder a los registros existentes en la base de datos
 */
 router.get('/obtenerUsuarios', (req, res) => {
     Usuario
