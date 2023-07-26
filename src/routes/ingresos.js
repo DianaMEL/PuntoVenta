@@ -5,7 +5,7 @@
 
 //Requerimos  express y el modelo Ingreso
 const express = require('express');
-const Ingreso = require('../models/ingreso');
+const Ingreso = require('../models/ingresos');
 
 const router = express.Router();
 

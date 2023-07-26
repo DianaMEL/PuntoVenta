@@ -5,7 +5,7 @@
 
 //Requerimos  express y el modelo egreso
 const express = require('express');
-const Egreso = require('../models/egreso');
+const Egreso = require('../models/egresos');
 
 const router = express.Router();
 

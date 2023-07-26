@@ -18,6 +18,8 @@ app.use(express.json());
 const usuarioRoutes = require('./routes/usuarios');
 const ventaRoutes = require('./routes/ventas');
 const productoRoutes = require('./routes/productos');
+const ingresoRoutes = require('./routes/ingresos');
+const egresoRoutes = require('./routes/egresos');
 
 // routes
 app.get('/', (req, res) => {
@@ -26,6 +28,8 @@ app.get('/', (req, res) => {
 app.use('/', usuarioRoutes);
 app.use('/', ventaRoutes);
 app.use('/', productoRoutes);
+app.use('/', ingresoRoutes);
+app.use('/', egresoRoutes);
 
 // conexion a MongoDB
 mongoose.connect(process.env.MONGODB_URI)
