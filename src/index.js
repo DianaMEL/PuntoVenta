@@ -9,9 +9,11 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const app = express();
+//definimos el puerto para el servidor 
 const port = process.env.PORT || 3000;
 
 // middlewares
+//Se utiliza para analizar el cuerpo de las solicitudes entrantes en formato JSON.
 app.use(express.json());
 
 //importamos los archivos de rutas para cada modelo
