@@ -6,6 +6,7 @@
 //Requerimos  express y el modelo venta
 const express = require('express');
 const Venta = require('../models/ventas');
+const Producto = require('../models/productos');
 const router = express.Router();
 
 //Funcion para obtener la fecha y hora local
@@ -27,27 +28,34 @@ function getDate() {
  * Se crea un nuevo documento "Venta".
  * Se gurda en la base de datos mediante newVenta.save().
  */ 
-router.post('/crearVenta', (req, res) =>{
-    const {productos, total} = req.body;
-    //const fecha = getDate();
+router.post('/crearVenta', async (req, res) => {
+    // Obtener los IDs de los productos incluidos en la venta desde el cuerpo de la solicitud
+    const {productos} = req.body;
 
-    const newVenta = new Venta({
+    // obtener los detlles de los proutos por el id
+    const productosDetalles = await Producto.find({_id: { $in: productos}}, 'precio');
+
+    // calcular el precio total sumando los precios de los productos
+    const total = productosDetalles.reduce((tot, producto) => tot + producto.precio, 0);
+
+    // crear una nueva venta 
+    const nuevaVenta = new Venta({ 
         productos: productos,
         total: total
     });
-
-    newVenta.save()
+    nuevaVenta.save()
     .then((data) => res.json(data))
     .catch((error) => res.json({message: error}));
+
 });
 
 /**------------Obtener Ventas-------------------
  * Creamos la ruta '/obtenerVentas' 
  * Es un GET que permite acceder a los registros existentes en la base de datos
 */
-router.get('/obtenerVentas', (req, res) => {
-    Venta
-    .find()
+router.get('/obtenerVentas', async (req, res) => {
+    await Venta.find()
+    .populate('productos') 
     .then((data) => res.json(data))
     .catch((error) => res.json({ message:error }));
 });
@@ -57,9 +65,10 @@ router.get('/obtenerVentas', (req, res) => {
  * El Id se obtine de los parametros de la URL (req.params).
  * Se busca la venta en la base de datos mediante 'Venta.findById(id)'.
  */
-router.get('/obtenerVenta/:id', (req, res) =>{
+router.get('/obtenerVenta/:id', async (req, res) => {
     const {id} = req.params;
-    Venta.findById(id)
+    await Venta.findById(id)
+    .populate('productos') 
     .then((data) => res.json(data))
     .catch((error) => res.json({message: error}));
 });
@@ -71,12 +80,20 @@ router.get('/obtenerVenta/:id', (req, res) =>{
  * Se actualiza el resgitro utilizando Venta.updateOne().
  * 
  */
-router.put('/actualizarVenta/:id', (req, res) => {
+router.put('/actualizarVenta/:id',async (req, res) => {
+    // Obtener los IDs de los productos incluidos en la venta desde el cuerpo de la solicitud
+    const {productos} = req.body;
     const {id} = req.params;
-    const {productos, total} = req.body;
     const fecha = getDate();
 
-    Venta.updateOne({_id: id}, {$set:{productos: productos, total: total, fecha: fecha}})
+    // obtener los detlles de los proutos por el id
+    const productosDetalles = await Producto.find({_id: { $in: productos}}, 'precio');
+
+    // calcular el precio total sumando los precios de los productos
+    const total = productosDetalles.reduce((tot, producto) => tot + producto.precio, 0);
+
+
+    Venta.updateOne({_id: id}, {$set:{productos: productos, total:total, fecha: fecha}})
     .then((data) => res.json(data))
     .catch((error) => res.json({message: error}));
 });

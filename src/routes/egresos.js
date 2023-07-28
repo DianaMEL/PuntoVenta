@@ -6,6 +6,7 @@
 //Requerimos  express y el modelo egreso
 const express = require('express');
 const Egreso = require('../models/egresos');
+const Usuario = require('../models/usuarios');
 
 const router = express.Router();
 
@@ -46,9 +47,12 @@ router.post('/crearEgreso', (req, res) =>{
  * Se buscan los egresos en la base de datos mediante 'Egreso.find()'.
  * 
  */
- router.get('/obtenerEgresos', (req, res) =>{
-    
-    Egreso.find().then((data) => res.json(data)).catch((error) => res.json({message: error}));
+ router.get('/obtenerEgresos', async (req, res) =>{
+
+    await Egreso.find()
+    .populate('idUsuario')
+    .then((data) => res.json(data))
+    .catch((error) => res.json({message: error}));
 });
 
 /**-------------Obtener Egreso-----------
@@ -58,9 +62,13 @@ router.post('/crearEgreso', (req, res) =>{
  * 
  */
 
-router.get('/obtenerEgreso/:id', (req, res) =>{
+router.get('/obtenerEgreso/:id', async (req, res) =>{
     const {id} = req.params;
-    Egreso.findById(id).then((data) => res.json(data)).catch((error) => res.json({message: error}));
+
+    // buscar el egreso por su id y "poblar" los datos del usuario asociado
+    const egreso = await Egreso.findById(id).populate('idUsuario');
+
+    res.status(200).json({egreso}) 
 });
 
 /**---------Actualizar Egreso-----------

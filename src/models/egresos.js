@@ -8,10 +8,11 @@ const mongoose = require('mongoose');
 
 //Definición del esquema para la colección de egresos
 const egresoSchema = mongoose.Schema({
-    idUsuario:  {
+    idUsuario: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Usuario'
-      },
+        ref: 'Usuarios',
+        required: true
+      }],
       cantidad: {
         type: Number,
         required: true

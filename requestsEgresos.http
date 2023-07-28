@@ -4,15 +4,15 @@ POST http://localhost:3000/crearEgreso HTTP/1.1
 Content-Type: application/json
 
 {
-    "idUsuario": "64b58f1cfbec98946f574a25",
-    "cantidad": 990
+    "idUsuario": "64b23a74fcf1dcaa568a09b1",
+    "cantidad": 100
 }
 
 ###
 GET http://localhost:3000/obtenerEgresos HTTP/1.1
 
 ###
-GET http://localhost:3000/obtenerEgreso/64b7573daf7ee4bb0e46e97d HTTP/1.1
+GET http://localhost:3000/obtenerEgreso/64c3fec5d8c2566cccafe943 HTTP/1.1
 
 ###
 PUT http://localhost:3000/actualizarEgreso/64b7573daf7ee4bb0e46e97d HTTP/1.1
@@ -24,4 +24,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/eliminarEgreso/64b7573daf7ee4bb0e46e97d HTTP/1.1
+DELETE http://localhost:3000/eliminarEgreso/64b573803faf7a62c71ef032 HTTP/1.1

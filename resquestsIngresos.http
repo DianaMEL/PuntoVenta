@@ -11,10 +11,10 @@ Content-Type: application/json
 GET http://localhost:3000/obtenerIngresos HTTP/1.1
 
 ###
-GET http://localhost:3000/obtenerIngreso/64c1806f30717a340e73705f HTTP/1.1
+GET http://localhost:3000/obtenerIngreso/64b810c9408a22fc6c6ec0b7 HTTP/1.1
 
 ###
-PUT http://localhost:3000/actualizarIngreso/64c1806f30717a340e73705f HTTP/1.1
+PUT http://localhost:3000/actualizarIngreso/64b704b461f0682247d082d2 HTTP/1.1
 Content-Type: application/json
 
 {
